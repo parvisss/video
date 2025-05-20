@@ -1,49 +1,24 @@
 import 'dart:io';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controllers/my_chewie_controller.dart';
-import 'package:video_player/video_player.dart';
+import 'package:lecle_yoyo_player/lecle_yoyo_player.dart';
 
-class LocalVideoPlayer extends StatefulWidget {
+class LocalVideoPlayer extends StatelessWidget {
   final File file;
 
   const LocalVideoPlayer({super.key, required this.file});
 
   @override
-  State<LocalVideoPlayer> createState() => _LocalVideoPlayerState();
-}
-
-class _LocalVideoPlayerState extends State<LocalVideoPlayer> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.file(widget.file)
-      ..initialize().then((_) {
-        setState(() {});
-      });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return _controller.value.isInitialized
-        ? AspectRatio(
-          aspectRatio: _controller.value.aspectRatio,
-          child: Chewie(
-            controller:
-                MyChewieController(
-                  videoPlayerController: _controller,
-                  autoplay: false,
-                ).controller,
-          ),
-        )
-        : Center(child: CircularProgressIndicator());
+    return YoYoPlayer(
+      url: file.path,
+      aspectRatio: 16 / 9,
+      videoStyle: VideoStyle(
+        playIcon: Icon(Icons.play_arrow, size: 50),
+        qualityStyle: const TextStyle(color: Colors.white),
+      ),
+      videoLoadingStyle: const VideoLoadingStyle(
+        loading: Center(child: CircularProgressIndicator()),
+      ),
+    );
   }
 }

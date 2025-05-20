@@ -45,7 +45,8 @@ final List<VideoModel> fakeVideos = [
   ),
   VideoModel(
     id: 2,
-    path: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+    path:
+        'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8',
     title: 'Sintel',
     coverPhoto: 'https://i.ytimg.com/vi/MeFoUwes8nE/maxresdefault.jpg',
     duration: '00:14:48',
